@@ -13,7 +13,13 @@ app.get('/',function(req,resp){
 
 app.get('/perguntar',function(resq,res){
         res.render('perguntar')
-})
+});
+
+app.post('/salvarpergunta',function(req,res){
+
+    res.send('Formulario recebido')
+
+});
 
 app.listen(8080,(error)=>{
 
