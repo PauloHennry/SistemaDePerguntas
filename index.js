@@ -1,13 +1,14 @@
 const express = require('express');
 const app = express();
+const bodyParse = require('body-parser');
 
-//Configurando o EJS com o Express como View engine;
+
 app.set('view engine','ejs');
-// Configuração para poder ler arquivos staticos;
 app.use(express.static('public'));
+app.use(bodyParse.urlencoded({extended: false}))
+app.use(bodyParse.json());
 
 app.get('/',function(req,resp){
-    //Usamos o rende para poder rederizar o nosso HTML na tela para o usuario;
  resp.render("index");
 });
 
@@ -16,9 +17,9 @@ app.get('/perguntar',function(resq,res){
 });
 
 app.post('/salvarpergunta',function(req,res){
-
-    res.send('Formulario recebido')
-
+    let titulo = req.body.titulo;
+    let descricao = req.body.descricao;
+    res.send(`Formulario recebido titulo ${titulo} descrição ${descricao}` );
 });
 
 app.listen(8080,(error)=>{
