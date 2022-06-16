@@ -1,8 +1,19 @@
 const express = require('express');
 const app = express();
 const bodyParse = require('body-parser');
+const connection = require('./database/database');
+const perguntaModel = require('./database/Perguntas')
 
 
+connection
+    .authenticate()
+    .then(() =>{
+        console.log('Conexão feita com sucesso');
+    })
+    .catch((Error) => {
+        console.log(Error);
+    });
+    
 app.set('view engine','ejs');
 app.use(express.static('public'));
 app.use(bodyParse.urlencoded({extended: false}))
